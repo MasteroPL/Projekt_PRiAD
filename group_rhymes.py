@@ -38,7 +38,7 @@ class RhymeGrouper:
         self.rhyme_list_unprocessed = None
         self.file = None
 
-    def read_buffer(self, offset): # offset = 1-4, liczba następnych linii do sczytania
+    def read_to_buffer(self, offset): # offset = 1-4, liczba następnych linii do sczytania
         # Dopasowania wskaźnika pierwszej linii
         if self.current_line_number == -1:
             self.current_line_number = 0
@@ -157,16 +157,16 @@ class RhymeGrouper:
         self.init_rhyme_lists()
         self.file = open(source_file, mode="r", encoding="utf-8")
 
-        self.read_buffer(4)
+        self.read_to_buffer(4)
         while(self.buffer_valid_for_grouping()):
             rhyme = self.group_buffer()
             self.rhyme_list_unprocessed.append(rhyme)
             self.rhyme_groups_unprocessed[rhyme.group_name].append(rhyme)
 
             if rhyme.group_name == "unspecified":
-                self.read_buffer(1)
+                self.read_to_buffer(1)
             else:
-                self.read_buffer(4)
+                self.read_to_buffer(4)
 
         if not self.lines_buffer[0] is None:
             rhyme = RhymeGroup(self.current_line_number, self.lines_buffer.copy(), None, "unspecified")

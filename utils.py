@@ -1,6 +1,6 @@
 import string
 
-unhandled_punctuation_characters = "—«"
+unhandled_punctuation_characters = "—«»"
 
 def strip_punctuation(text):
     global unhandled_punctuation_characters

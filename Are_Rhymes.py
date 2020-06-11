@@ -1,4 +1,9 @@
+import utils
+
 def are_rhyming(line1,line2):
+    line1 = utils.clear_for_rhymes_detection(line1)
+    line2 = utils.clear_for_rhymes_detection(line2)
+
     line1_syllabe = 0
     line2_syllabe = 0
     rem = 0

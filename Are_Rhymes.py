@@ -74,11 +74,14 @@ def are_rhyming(line1,line2):
     diff = abs(line1_syllabe - line2_syllabe)
     len1 = len(rhyme1)
     len2 = len(rhyme2)
-    if (not(97<=ord(rhyme1[len1 - 1])<=122)):
-        len1 -= 1
-    if (not(97<=ord(rhyme1[len2 - 1])<=122)):
-        len2 -= 1
-    if ((diff/max(line1_syllabe,line2_syllabe)) <= 0.3):
+    #print(rhyme1)
+    #print(rhyme2)
+    if (len1 > 1 and len2 > 1):
+        while (len1 > 0 and not(97<=ord(rhyme1[len1 - 1])<=122)):
+            len1 -= 1
+        while (len2 > 0 and not(97<=ord(rhyme2[len2 - 1])<=122)):
+            len2 -= 1
+    if (len1 != 0 and len2 != 0 and (diff/max(line1_syllabe,line2_syllabe)) <= 0.3):
         for i in range(1,3):
             if (not(rhyme1[len(rhyme1)-i] == rhyme2[len(rhyme2)-i])):
                 isRhyme = False
@@ -90,4 +93,4 @@ def are_rhyming(line1,line2):
 
        
 
-print(are_rhyming("Ty jesteś jak zdrowie.","w całej ozdobie,"))
+#print(are_rhyming("Ty jesteś jak zdrowie.","w całej ozdobie,"))

@@ -4,6 +4,11 @@ def are_rhyming(line1,line2):
     line1 = utils.clear_for_rhymes_detection(line1)
     line2 = utils.clear_for_rhymes_detection(line2)
 
+    a_rhymes = ['a','ą']
+    e_rhymes = ['e','ę']
+    o_rhymes = ['o', 'ą']
+    u_rhymes = ['u','ó']
+    z_rhymes = ['z','ż']
     line1_syllabe = 0
     line2_syllabe = 0
     rem = 0
@@ -93,4 +98,9 @@ def are_rhyming(line1,line2):
 
        
 
-#print(are_rhyming("Ty jesteś jak zdrowie.","w całej ozdobie,"))
+print(are_rhyming("(Tak każe przyzwoitość). Nikt tam nie rozprawiał","O porządku, nikt mężczyzn i dam nie ustawiał:"))
+
+#I wionęła ogrodem, przez płotki, przez kwiaty,
+#I po desce opartej o ścianę komnaty…
+
+

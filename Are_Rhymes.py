@@ -79,8 +79,6 @@ def are_rhyming(line1,line2):
     diff = abs(line1_syllabe - line2_syllabe)
     len1 = len(rhyme1)
     len2 = len(rhyme2)
-    #print(rhyme1)
-    #print(rhyme2)
     
     if (len1 > 1 and len2 > 1):
         while (len1 > 0 and not(97<=ord(rhyme1[len1 - 1])<=122)):
@@ -107,14 +105,8 @@ def are_rhyming(line1,line2):
                 isRhyme = True
             if (((rhyme1[len1-i] == 'z' and rhyme1[len1-i-1] == 'r') and rhyme2[len2-i] == 'ż') or (rhyme1[len1-i] == 'ż') and (rhyme2[len2-i] == 'z' and rhyme2[len2-i-1] == 'r') ):
                 isRhyme = True
-            print(rhyme1[len1-i])
-            print(rhyme2[len2-i])
-            print(isRhyme)
         if ((rhyme1[len1 - 3] == 'i' or rhyme1[len1 - 3] == 'y')  and (rhyme2[len2 - 3] != 'i' and rhyme2[len2 - 3] != 'y')):
             isRhyme = False
-        print(rhyme1[len1-3])
-        print(rhyme2[len2-3])
-        print(isRhyme)
     else:
         isRhyme = False
     return isRhyme
@@ -123,7 +115,7 @@ def are_rhyming(line1,line2):
 
        
 
-print(are_rhyming("Lecz młodzież o piękności metrykę nie pyta,","Bo młodzieńcowi młodą jest każda kobiéta,"))
+#print(are_rhyming("Lecz młodzież o piękności metrykę nie pyta,","Bo młodzieńcowi młodą jest każda kobiéta,"))
 
 #Ogrodniczka dziewczynką zdawała się małą,
 #A pani ta niewiastą już w latach dojrzałą;

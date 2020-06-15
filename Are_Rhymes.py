@@ -8,7 +8,7 @@ def are_rhyming(line1,line2):
     e_rhymes = ['e','ę']
     o_rhymes = ['o', 'ą']
     u_rhymes = ['u','ó']
-    z_rhymes = ['z','ż']
+    polish_signs = ['ą','ę','ó','ś','ć','ż','ź','ł','Ą','Ę','Ó','Ś','Ć','Ź','Ż','Ł']
     line1_syllabe = 0
     line2_syllabe = 0
     rem = 0
@@ -81,15 +81,40 @@ def are_rhyming(line1,line2):
     len2 = len(rhyme2)
     #print(rhyme1)
     #print(rhyme2)
+    
     if (len1 > 1 and len2 > 1):
         while (len1 > 0 and not(97<=ord(rhyme1[len1 - 1])<=122)):
-            len1 -= 1
-        while (len2 > 0 and not(97<=ord(rhyme2[len2 - 1])<=122)):
-            len2 -= 1
-    if (len1 != 0 and len2 != 0 and (diff/max(line1_syllabe,line2_syllabe)) <= 0.3):
+            if (not(rhyme1[len1 - 1] in polish_signs)):
+                len1 -= 1
+            else:
+                break
+        while (len2 > 0 and (not(97<=ord(rhyme2[len2 - 1])<=122))):
+            if (not(rhyme2[len2 - 1] in polish_signs)):
+                len2 -= 1
+            else:
+                break
+    if (len1 != 0 and len2 != 0 and (diff/max(line1_syllabe,line2_syllabe)) <= 0.3): 
         for i in range(1,3):
-            if (not(rhyme1[len(rhyme1)-i] == rhyme2[len(rhyme2)-i])):
+            if (not(rhyme1[len1-i] == rhyme2[len2-i])):
                 isRhyme = False
+            if (rhyme1[len1-i] in a_rhymes and rhyme2[len2-i] in a_rhymes):
+                isRhyme = True
+            if (rhyme1[len1-i] in e_rhymes and rhyme2[len2-i] in e_rhymes):
+                isRhyme = True
+            if (rhyme1[len1-i] in u_rhymes and rhyme2[len2-i] in u_rhymes):
+                isRhyme = True
+            if (rhyme1[len1-i] in o_rhymes and rhyme2[len2-i] in o_rhymes):
+                isRhyme = True
+            if (((rhyme1[len1-i] == 'z' and rhyme1[len1-i-1] == 'r') and rhyme2[len2-i] == 'ż') or (rhyme1[len1-i] == 'ż') and (rhyme2[len2-i] == 'z' and rhyme2[len2-i-1] == 'r') ):
+                isRhyme = True
+            print(rhyme1[len1-i])
+            print(rhyme2[len2-i])
+            print(isRhyme)
+        if ((rhyme1[len1 - 3] == 'i' or rhyme1[len1 - 3] == 'y')  and (rhyme2[len2 - 3] != 'i' and rhyme2[len2 - 3] != 'y')):
+            isRhyme = False
+        print(rhyme1[len1-3])
+        print(rhyme2[len2-3])
+        print(isRhyme)
     else:
         isRhyme = False
     return isRhyme
@@ -98,9 +123,12 @@ def are_rhyming(line1,line2):
 
        
 
-print(are_rhyming("(Tak każe przyzwoitość). Nikt tam nie rozprawiał","O porządku, nikt mężczyzn i dam nie ustawiał:"))
+print(are_rhyming("Lecz młodzież o piękności metrykę nie pyta,","Bo młodzieńcowi młodą jest każda kobiéta,"))
 
-#I wionęła ogrodem, przez płotki, przez kwiaty,
-#I po desce opartej o ścianę komnaty…
+#Ogrodniczka dziewczynką zdawała się małą,
+#A pani ta niewiastą już w latach dojrzałą;
+#Lecz młodzież o piękności metrykę nie pyta,
+#Bo młodzieńcowi młodą jest każda kobiéta,
+
 
 

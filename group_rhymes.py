@@ -1,5 +1,7 @@
 from Are_Rhymes import are_rhyming
 import utils
+import matplotlib.pyplot as plt
+import numpy as np
 
 results = [ False, True, False, False, True, False, False, True, False, False, True, True, False ]
 index = -1
@@ -187,11 +189,54 @@ def random_determinant(line1, line2):
     else:
         return False
 
-grouper = RhymeGrouper(are_rhyming)
-grouper.group("Pan Tadeusz.txt")
 
-file = open("output.txt", mode="w", encoding="utf-8")
-for rhyme in grouper.rhyme_list:
-    file.write(str(rhyme))
-    file.write("\n\n")
-file.close()
+grupy = []
+nazwa_pliku = 'C:\\Users\\Greenhoody\\Desktop\\Projekt_PRiAD\\Księgi Pana Tadeusza\\Księga{}.txt'
+
+for x in range(1, 12):
+    grouper = RhymeGrouper(are_rhyming)
+    grouper.group(nazwa_pliku.format(x))
+    grupy.append(grouper)
+
+grouper1 = RhymeGrouper(are_rhyming)
+grouper2 = RhymeGrouper(are_rhyming)
+grouper1.group('C:\\Users\\Greenhoody\\Desktop\\Projekt_PRiAD\\Księgi Pana Tadeusza\\Epilog.txt')
+grupy.append(grouper1)
+grouper2.group('C:\\Users\\Greenhoody\\Desktop\\Projekt_PRiAD\\Księgi Pana Tadeusza\\Pan Tadeusz Cały.txt')
+grupy.append(grouper2)
+
+evens = []
+crosses = []
+surrounding = []
+unspecified = []
+
+for x in range(13):
+    evens.append(grupy[x].rhyme_groups["even"].__len__())
+    crosses.append(grupy[x].rhyme_groups["cross"].__len__())
+    surrounding.append(grupy[x].rhyme_groups["surrounding"].__len__())
+    unspecified.append(grupy[x].rhyme_groups["unspecified"].__len__())
+
+księgi = range(1,12)
+
+
+
+fig, axes = plt.subplots()
+ax0, ax1, ax2, ax3 = axes.flatten()
+
+colors = ['red', 'tan', 'lime', 'pink']
+ax0.hist(księgi, evens, density=True, histtype='bar', color=colors, label=colors)
+ax0.legend(prop={'size': 10})
+ax0.set_title('rymy sąsiadujące')
+
+ax1.hist(księgi, crosses, density=True, histtype='bar', stacked=True)
+ax1.set_title('rymy krzyżowe')
+
+ax2.hist(księgi, surrounding, histtype='step', stacked=True, fill=False)
+ax2.set_title('rymy okalające')
+
+ax3.hist(księgi, unspecified, histtype='bar')
+ax3.set_title('rymy nieokreślone')
+
+plt.show()
+
+print("Fuck JAnek")

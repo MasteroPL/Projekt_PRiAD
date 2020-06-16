@@ -193,15 +193,15 @@ def random_determinant(line1, line2):
 grupy = []
 nazwa_pliku = 'C:\\Users\\Greenhoody\\Desktop\\Projekt_PRiAD\\Księgi Pana Tadeusza\\Księga{}.txt'
 
-for x in range(1, 12):
+for x in range(1, 13):
     grouper = RhymeGrouper(are_rhyming)
     grouper.group(nazwa_pliku.format(x))
     grupy.append(grouper)
 
 grouper1 = RhymeGrouper(are_rhyming)
-grouper2 = RhymeGrouper(are_rhyming)
 grouper1.group('C:\\Users\\Greenhoody\\Desktop\\Projekt_PRiAD\\Księgi Pana Tadeusza\\Epilog.txt')
 grupy.append(grouper1)
+grouper2 = RhymeGrouper(are_rhyming)
 grouper2.group('C:\\Users\\Greenhoody\\Desktop\\Projekt_PRiAD\\Księgi Pana Tadeusza\\Pan Tadeusz Cały.txt')
 grupy.append(grouper2)
 
@@ -216,27 +216,27 @@ for x in range(13):
     surrounding.append(grupy[x].rhyme_groups["surrounding"].__len__())
     unspecified.append(grupy[x].rhyme_groups["unspecified"].__len__())
 
-księgi = range(1,12)
+księgi = range(1,13)
+księgin=np.array(księgi)
+
+x = np.arange(len(księgi))
+width = 0.2
 
 
 
-fig, axes = plt.subplots()
-ax0, ax1, ax2, ax3 = axes.flatten()
+plt.figure()
+plt.bar(x, surrounding[:12],width, label = 'okalające')
 
-colors = ['red', 'tan', 'lime', 'pink']
-ax0.hist(księgi, evens, density=True, histtype='bar', color=colors, label=colors)
-ax0.legend(prop={'size': 10})
-ax0.set_title('rymy sąsiadujące')
+plt.figure()
+plt.bar(x,crosses[:12] ,width, label = 'krzyzowe')
+plt.figure()
+plt.bar(x, evens[:12], width, label = 'sasiadujace')
 
-ax1.hist(księgi, crosses, density=True, histtype='bar', stacked=True)
-ax1.set_title('rymy krzyżowe')
+plt.figure()
+piechartx=[evens[-1],crosses[-1],surrounding[-1],unspecified[-1]]
 
-ax2.hist(księgi, surrounding, histtype='step', stacked=True, fill=False)
-ax2.set_title('rymy okalające')
+plt.pie(piechartx, labels=["sasiadujace","krzyzowe","'okalające","nieokreślone"])
 
-ax3.hist(księgi, unspecified, histtype='bar')
-ax3.set_title('rymy nieokreślone')
 
 plt.show()
-
-print("Fuck JAnek")
+print("Fuck Janek")

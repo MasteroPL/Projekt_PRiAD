@@ -75,6 +75,10 @@ def are_rhyming(line1,line2):
             else:
                 prev_i = False
                 prev_ae = False
+    rhyme1.replace('ó','u')
+    rhyme1.replace('rz','ż')
+    rhyme2.replace('ó','u')
+    rhyme2.replace('rz','ż')
     isRhyme = True
     diff = abs(line1_syllabe - line2_syllabe)
     len1 = len(rhyme1)

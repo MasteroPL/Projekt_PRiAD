@@ -191,7 +191,7 @@ def random_determinant(line1, line2):
 
 
 grupy = []
-nazwa_pliku = 'C:\\Users\\Greenhoody\\Desktop\\Projekt_PRiAD\\Księgi Pana Tadeusza\\Księga{}.txt'
+nazwa_pliku = 'Księgi Pana Tadeusza\\Księga{}.txt'
 
 for x in range(1, 13):
     grouper = RhymeGrouper(are_rhyming)
@@ -199,10 +199,10 @@ for x in range(1, 13):
     grupy.append(grouper)
 
 grouper1 = RhymeGrouper(are_rhyming)
-grouper1.group('C:\\Users\\Greenhoody\\Desktop\\Projekt_PRiAD\\Księgi Pana Tadeusza\\Epilog.txt')
+grouper1.group('Księgi Pana Tadeusza\\Epilog.txt')
 grupy.append(grouper1)
 grouper2 = RhymeGrouper(are_rhyming)
-grouper2.group('C:\\Users\\Greenhoody\\Desktop\\Projekt_PRiAD\\Księgi Pana Tadeusza\\Pan Tadeusz Cały.txt')
+grouper2.group('Księgi Pana Tadeusza\\Pan Tadeusz Cały.txt')
 grupy.append(grouper2)
 
 evens = []

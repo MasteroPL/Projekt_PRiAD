@@ -4,6 +4,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 class RhymeGroup:
+    '''
+    Przechowuje informacje o pojedynczej grupie rymów:
+    - Wszystkie linie tekstu w grupie (jako listę stringów)
+    - Dane rymowania (które linie rymują się z którymi)
+    - Numer pierwszej linii tej grupy w pliki źródłowym
+    - Nazwa grupy (e.x: "even", "cross", "surrounding", "unspecified")
+    '''
     def __init__(self, first_line_number, lines, rhyming_data, group_name):
         self.first_line_number = first_line_number
         self.lines = lines
@@ -20,6 +27,9 @@ class RhymeGroup:
 
 
 class RhymeGrouper:
+    '''
+    Narzędzie do automatycznego grupowania rymów z pliku źródłowego
+    '''
 
     def init_rhyme_lists(self):
         self.rhyme_groups = { "even": [], "cross": [], "surrounding": [], "unspecified": []}
@@ -28,6 +38,9 @@ class RhymeGrouper:
         self.rhyme_list_unprocessed = []
 
     def __init__(self, rhyming_determinant):
+        '''
+        :param rhyming_determinant: (line1: str, line2: str): Boolean; Funkcja określająca, czy dwie linie się ze sobą rymują
+        '''
         self.rhyming_determinant = rhyming_determinant
         self.lines_buffer = [ None, None, None, None ] # 4 linie bufora
         self.current_line_number = -1
@@ -38,6 +51,11 @@ class RhymeGrouper:
         self.file = None
 
     def read_to_buffer(self, offset): # offset = 1-4, liczba następnych linii do sczytania
+        '''
+        Czyta określoną liczbę następnych linii do buffora. Bufor ma 4 miejsca i funcjonuje w nim zasada FIFO (First in, first out)
+        :param offset: liczba linii do sczytania (od 1 do 4)
+        '''
+
         # Dopasowania wskaźnika pierwszej linii
         if self.current_line_number == -1:
             self.current_line_number = 0
@@ -69,6 +87,9 @@ class RhymeGrouper:
 
 
     def buffer_valid_for_grouping(self):
+        '''
+        Sprwadza czy aktualna zawartość buffora jest poprawna do grupowania
+        '''
         for i in range(4):
             if self.lines_buffer[i] is None:
                 return False
@@ -76,6 +97,11 @@ class RhymeGrouper:
         return True
 
     def group_buffer(self):
+        '''
+        Tworzy grupę z aktualnej zawartości buffora
+
+        :returns: Zwraca obiekt klasy RhymeGroup, zawierający informację o grupie utworzonej z buffora
+        '''
         rhymes_with = [[], [], [], []]
         lines = self.lines_buffer.copy()
 
@@ -115,6 +141,9 @@ class RhymeGrouper:
         return RhymeGroup(self.current_line_number, lines, rhymes_with, "unspecified")
 
     def process_lists(self):
+        '''
+        Przetwarza nieprzetworzoną listę grup tak, aby sąsiadujące grupy "unspecified" zostały połączone w całość
+        '''
         lines_buffer = []
         unspecified_line_number = None
 
@@ -153,6 +182,12 @@ class RhymeGrouper:
            
 
     def group(self, source_file):
+        '''
+        Wykonuje grupowanie rymów znalezionych w pliku źródłowym
+
+        :param source_file: ścieżka do pliku źródłowego
+        '''
+
         self.init_rhyme_lists()
         self.file = open(source_file, mode="r", encoding="utf-8")
 

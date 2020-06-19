@@ -66,7 +66,7 @@ plt.bar(OX, unspecified[:13], width, label = 'nieokreślone', bottom=suma2)
 
 plt.legend(frameon=True,bbox_to_anchor=(1.05, 1))
 plt.title("Ilość rymów w poszczególnych księgach")
-plt.show()
+
 plt.figure()
 piechartx=[evens[-1],surrounding[-1],unspecified[-1],crosses[-1]]
 
@@ -104,5 +104,3 @@ plt.pie(piechartx, labels=["sasiadujace","krzyzowe","okalające","nieokreślone"
 plt.title("Procentowa zawartość rymów w \"Pan Balcer w Brazylii\"")
 
 plt.show()
-
-print("Debug")

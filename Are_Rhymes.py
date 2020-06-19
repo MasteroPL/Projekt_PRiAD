@@ -119,7 +119,7 @@ def are_rhyming(line1,line2):
 
        
 
-print(are_rhyming("Lecz młodzież o piękności metrykę nie pyta,","Bo młodzieńcowi młodą jest każda kobiéta,"))
+#print(are_rhyming("Lecz młodzież o piękności metrykę nie pyta,","Bo młodzieńcowi młodą jest każda kobiéta,"))
 
 #I z much; wiec dalej ja do tej gromady I
 #A iż rzecz każdą zaczynać trza z końca

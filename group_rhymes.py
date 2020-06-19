@@ -3,6 +3,9 @@ import utils
 import matplotlib.pyplot as plt
 import numpy as np
 
+results = [ False, True, False, False, True, False, False, True, False, False, True, True, False ]
+index = -1
+
 class RhymeGroup:
     def __init__(self, first_line_number, lines, rhyming_data, group_name):
         self.first_line_number = first_line_number
@@ -177,4 +180,11 @@ class RhymeGrouper:
         self.file.close()
         self.file = None
 
-
+def random_determinant(line1, line2):
+    global index
+    global results
+    index += 1
+    if index < results.__len__():
+        return results[index]
+    else:
+        return False

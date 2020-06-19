@@ -95,7 +95,7 @@ def are_rhyming(line1,line2):
                 len2 -= 1
             else:
                 break
-    if (len1 > 1 and len2 > 1 and (diff/max(line1_syllabe,line2_syllabe)) <= 0.3): 
+    if (len1 > 1 and len2 > 1 and (diff/max(line1_syllabe,line2_syllabe)) <= 0.8): 
         for i in range(1,3):
             if (not(rhyme1[len1-i] == rhyme2[len2-i])):
                 isRhyme = False

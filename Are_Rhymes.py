@@ -95,7 +95,7 @@ def are_rhyming(line1,line2):
                 len2 -= 1
             else:
                 break
-    if (len1 != 0 and len2 != 0 and (diff/max(line1_syllabe,line2_syllabe)) <= 0.3): 
+    if (len1 > 1 and len2 > 1 and (diff/max(line1_syllabe,line2_syllabe)) <= 0.3): 
         for i in range(1,3):
             if (not(rhyme1[len1-i] == rhyme2[len2-i])):
                 isRhyme = False
@@ -119,7 +119,10 @@ def are_rhyming(line1,line2):
 
        
 
-#print(are_rhyming("Lecz młodzież o piękności metrykę nie pyta,","Bo młodzieńcowi młodą jest każda kobiéta,"))
+print(are_rhyming("Lecz młodzież o piękności metrykę nie pyta,","Bo młodzieńcowi młodą jest każda kobiéta,"))
+
+#I z much; wiec dalej ja do tej gromady I
+#A iż rzecz każdą zaczynać trza z końca
 
 #Ogrodniczka dziewczynką zdawała się małą,
 #A pani ta niewiastą już w latach dojrzałą;

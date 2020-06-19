@@ -27,6 +27,8 @@ surrounding = []
 unspecified = []
 
 
+#colors [evens = green, surrounding = yellow, crossing = blue, unspecified = czerwone]
+
 for x in range(13):
     evens.append(grupy[x].rhyme_groups["even"].__len__())
     crosses.append(grupy[x].rhyme_groups["cross"].__len__())
@@ -52,25 +54,27 @@ plt.title("Procentowa zawartość rymów w księgach")
 
 plt.figure()
 
-plt.bar(OX, surrounding[:13],width, label = 'okalające')
 
-plt.bar(OX,crosses[:13] ,width, label = 'krzyzowe', bottom = surrounding[:13])
+plt.bar(OX, surrounding[:13],width, label = 'okalające', color = "yellow")
 
-suma = np.array(surrounding[:13]) + np.array(crosses[:13])
+plt.bar(OX, evens[:13], width, label = 'sasiadujace', bottom=surrounding[:13], color = "green")
 
-plt.bar(OX, evens[:13], width, label = 'sasiadujace', bottom=suma)
+suma = np.array(surrounding[:13]) + np.array(evens[:13])
 
-suma2 = suma + np.array(evens[:13])
+plt.bar(OX,crosses[:13] ,width, label = 'krzyzowe', bottom = suma, color = "blue")
 
-plt.bar(OX, unspecified[:13], width, label = 'nieokreślone', bottom=suma2)
+suma2 = suma + np.array(crosses[:13])
+
+plt.bar(OX, unspecified[:13], width, label = 'nieokreślone', bottom=suma2, color = "red")
 
 plt.legend(frameon=True,bbox_to_anchor=(1.05, 1))
 plt.title("Ilość rymów w poszczególnych księgach")
 
 plt.figure()
+
 piechartx=[evens[-1],surrounding[-1],unspecified[-1],crosses[-1]]
 
-plt.pie(piechartx, labels=["sasiadujace","okalające","nieokreślone", "krzyzowe"])
+plt.pie(piechartx, labels=["sasiadujace","okalające","nieokreślone", "krzyzowe"], colors=["green", "yellow","red","blue"])
 plt.title("Procentowa zawartość rymów w Panu Tadeuszu")
 plt.figure()
 
@@ -80,7 +84,7 @@ rymy = [grouper3.rhyme_groups["even"].__len__(), grouper3.rhyme_groups["cross"].
 xhymns = ["sąsiadujące","krzyżowe","okalające","nieokreślone"]
 xh = np.array(xhymns)
 plt.title("Procentowa zawartość rymów w wierszu \"Hymn\"")
-plt.pie(rymy,labels = ["sąsiadujące","krzyżowe","nieokreślone"])
+plt.pie(rymy,labels = ["sąsiadujące","krzyżowe","nieokreślone"], colors=["green","blue","red"])
 
 plt.figure()
 
@@ -88,7 +92,7 @@ grouper4 = RhymeGrouper(are_rhyming)
 grouper4.group('DoTrupa.txt')
 rymy2 = [grouper4.rhyme_groups["surrounding"].__len__(), grouper4.rhyme_groups["unspecified"].__len__()]
 #,grouper4.rhyme_groups["even"].__len__(), grouper4.rhyme_groups["cross"].__len__()
-plt.pie(rymy2,labels =["okalające","nieokreślone"] )
+plt.pie(rymy2,labels =["okalające","nieokreślone"] ,colors=["yellow","red"])
 #,"sąsiadujące","krzyżowe"
 plt.title("Procentowa zawartość rymów w wierszu \"Do Trupa\"")
 
@@ -100,7 +104,7 @@ grouperMK.group("Pan Balcer w Brazylii\sformatowane.txt")
 
 piechartx=[grouperMK.rhyme_groups["even"].__len__(),grouperMK.rhyme_groups["cross"].__len__(),grouperMK.rhyme_groups["surrounding"].__len__(),grouperMK.rhyme_groups["unspecified"].__len__()]
 
-plt.pie(piechartx, labels=["sasiadujace","krzyzowe","okalające","nieokreślone"])
+plt.pie(piechartx, labels=["sasiadujace","krzyzowe","okalające","nieokreślone"], colors=["green","blue","yellow","red"])
 plt.title("Procentowa zawartość rymów w \"Pan Balcer w Brazylii\"")
 
 plt.show()
